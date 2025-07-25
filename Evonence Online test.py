@@ -3,7 +3,6 @@ of dictionaries (e.g., [{"name": "Alice", "age": 30}, {"name": "Bob", "age": "25
 values for the "age" key. Return a list of invalid entries.
 """
 def validate_data(data):
-   
     invalid_entries = []
     for entry in data:
         age = entry.get("age")
@@ -11,30 +10,25 @@ def validate_data(data):
             invalid_entries.append(entry)
     return invalid_entries
 
-# Example data
-data = [
-    {"name": "Alice", "age": 30},
-    {"name": "Bob", "age": "25"},
-    {"name": "Charlie", "age": None},
-    {"name": "Diana", "age": 22},
-    {"name": "Eve"}  # age key is missing
-]
-# Validate data
-invalid = validate_data(data)
-# Output the result
-print("Invalid entries:")
-for entry in invalid:
-    print(entry)
 
-"""Output:
-Invalid entries:
-{'name': 'Bob', 'age': '25'}
-{'name': 'Charlie', 'age': None}
-{'name': 'Eve'}
+data = [
+    {"name": "Amit", "age": 30},
+    {"name": "Boby", "age": "25"},
+    {"name": "Viraj", "age": 22},
+    {"name": "Ansh", "age": None}, # age not specified
+    {"name": "Abhijit" } # age key is missing
+]
+
+invalid = validate_data(data)
+print("Invalid entries:", invalid)
+
+OUTPUT--> 
+Invalid entries: [{'name': 'Boby', 'age': '25'}, {'name': 'Ansh', 'age': None}, {'name': 'Abhijit'}]
 """
 
 """Scenario 2: Logging DecoratorTask: Create a decorator @log_execution_time that logs the time taken to execute a function.
 Use it to log the runtime of a sample function calculate_sum(n) that returns the sum of numbers from 1 to n."""
+
 
 import time
 import functools
@@ -45,8 +39,8 @@ def log_execution_time(func):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        duration = end_time - start_time
-        print(f"Function '{func.__name__}' executed in {duration:.6f} seconds")
+        execution_time = end_time - start_time
+        print(f"Function '{func.__name__}' executed in {execution_time:.6f} seconds")
         return result
     return wrapper
 
@@ -54,13 +48,15 @@ def log_execution_time(func):
 def calculate_sum(n):
     return sum(range(1, n + 1))
 
-total = calculate_sum(10000000)
+total = calculate_sum(1000000)
 print("Sum:", total)
 
-"""Output:
-Function 'calculate_sum' executed in 0.152468 seconds
-Sum: 50000005000000
 """
+OUTPUT-->
+Function 'calculate_sum' executed in 0.042382 seconds
+Sum: 500000500000
+"""
+
 
 """Scenario 3: Missing Value Handling
 Task: A dataset has missing values in the "income" column. Write code to:
@@ -75,7 +71,7 @@ import numpy as np
 
 # Sample dataset
 data = {
-    "name": ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace"],
+     "name": ["Amit", "Boby", "Ansh", "Viraj", "Ankita", "Jayesh", "Snehal"],
     "income": [50000, 55000, np.nan, 60000, 65000, np.nan, 70000]
 }
 
@@ -102,15 +98,15 @@ print(df)
 Skewness of 'income': 0.00
 Filled missing values with median: 60000.0
 
-Updated DataFrame:
-      name   income
-0    Alice  50000.0
-1      Bob  55000.0
-2  Charlie  60000.0
-3    David  60000.0
-4      Eve  65000.0
-5     Frank 60000.0
-6    Grace  70000.0
+ Updated DataFrame:
+     name   income
+0   Amit  52000.0
+1   Boby  65000.0
+2   Ansh  70000.0
+3   Viraj  73000.0
+4  Ankita  85000.0
+5   Jayesh  70000.0
+6   Snehal  70000.0
 """
 
 """Scenario 4: Text Pre-processing
@@ -125,9 +121,9 @@ import re
 # Sample DataFrame
 data = {
     "text": [
-        "Hello World!",
+        "Hello Pratiksha!",
         "Python is AWESOME!!",
-        "Data @Science is the future...",
+        "Data @2025 Science is the future...",
         "Pre-processing: Important step!!"
     ]
 }
@@ -145,9 +141,9 @@ print(df)
 
 """Output:
                   text                      cleaned_text
-0                      Hello World!                    [hello, world]
+0                Hello Pratiksha!                    [hello, pratiksha]
 1               Python is AWESOME!!             [python, is, awesome]
-2    Data @Science is the future...  [data, science, is, the, future]
+2    Data @2025 Science is the future...  [data, 2025, science, is, the, future]
 3  Pre-processing: Important step!!  [preprocessing, important, step]
 """
 
